@@ -10,17 +10,23 @@
  *     This is test controller for MyFit application.
  */
 
-package com.fuda.fitMe.controller;
+package com.fuda.fitMe.api.v1.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/test")
+import java.util.Collections;
+import java.util.Map;
+
+@RequestMapping("api/v1/test")
 @RestController
 public class TestController {
-    @GetMapping("/hello")
+
+    @GetMapping(value = "/hello", produces = MediaType.APPLICATION_JSON_VALUE)
     String getHello() {
-        return "<h1>Hello from "
+        return "{\"response\": \"Hello from "
                 + this.getClass().getCanonicalName()
-                + "</h1>";
+                + "\"}";
     }
+
 }
