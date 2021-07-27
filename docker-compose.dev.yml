@@ -1,0 +1,42 @@
+version: '2.2'
+services:
+  mefit:
+    build:
+      context: .
+    ports:
+      - 8000:8000
+      - 8080:8080
+    environment:
+      - SERVER_PORT=8080
+      - POSTGRES_URL=jdbc:postgresql://postgres_server/fitme
+#      - JAVA_DEBUG_PORT=*:8080
+      - JAVA_DEBUG=true
+#      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
+    volumes:
+      - ./:/app
+    command: ./mvnw spring-boot:run -Dspring-boot.run.profiles=postgres -Dspring-boot.run.jvmArguments="-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000"
+
+  postgres_server:
+    image: postgres:12
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=fitme
+#      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - POSTGRES_USER=fitme
+#      - MYSQL_PASSWORD=petclinic
+      - POSTGRES_DB=fitme
+    volumes:
+      - postgres_data:/var/lib/postgresql/12/main
+      - postgres_config:/etc/postgresql/12/main/conf.d
+
+  adminer_server:
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres_server
+    ports:
+      - 8081:9000
+
+volumes:
+  postgres_data:
+  postgres_config:

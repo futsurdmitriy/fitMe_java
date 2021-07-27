@@ -39,6 +39,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>fitMe</finalName>
 	</build>
 
 </project>
