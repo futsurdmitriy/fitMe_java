@@ -23,4 +23,5 @@ Project on Java spring boot framework (rest) for fit me application by Futsur Dm
     10. Let`s build our image ```  docker build --tag fit-me-java-docker . ```
     11. Run ``` docker run --rm -d --name fit-me-java-server --network postgres_net -e "POSTGRES_URL=jdbc:postgresql://postgres_server/fitme" -p 5432:5432 fit-me-java-docker ```
         if there is a problem with "already existing container" just remove it by ``` docker rm "container id" ```
-    12. 
+    12. To enable remote debugging follow that link https://docs.docker.com/language/java/develop/#connect-a-debugger (this may help in case of errors -> https://intellij-support.jetbrains.com/hc/en-us/community/posts/206844695-handshake-failed-error-with-Remote-Debugging)
+    13. 
